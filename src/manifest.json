@@ -3,7 +3,7 @@
   "name": "My Chrome Extension",
   "version": "1.0.0",
   "description": "A Chrome extension template",
-  "permissions": ["storage"],
+  "permissions": ["storage", "bookmarks"],
   "action": {
     "default_popup": "index.html"
   },
