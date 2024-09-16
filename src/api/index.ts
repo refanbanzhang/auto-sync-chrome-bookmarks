@@ -8,24 +8,15 @@ export async function sendToServer(bookmarks: chrome.bookmarks.BookmarkTreeNode[
     },
     body: JSON.stringify({
       data: {
-        data: bookmarks
+        bookmarks
       }
     }),
   })
   return res.json()
 }
 
-interface BookmarkData {
-  _id: string;
-  data: chrome.bookmarks.BookmarkTreeNode[];
-}
-
-interface ApiResponse {
-  affectedDocs: number;
-  data: BookmarkData[];
-}
-
-export async function fetchBookmarks(): Promise<ApiResponse> {
+export async function fetchBookmarks(): Promise<chrome.bookmarks.BookmarkTreeNode[]> {
   const res = await fetch(`${host}/data/getData`)
-  return res.json()
+  const data = await res.json()
+  return data.data[0].bookmarks
 }
