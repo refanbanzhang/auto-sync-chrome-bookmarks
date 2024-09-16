@@ -33,16 +33,12 @@ chrome.bookmarks.onRemoved.addListener(async () => {
 });
 
 const RULE_ID = 1;
-const TARGET_URL = "https://apiv3.shanbay.com/news/user_articles";
-const PARAM_KEY = "ipp";
-const PARAM_VALUE = "100";
-
-function createRule() {
-  return {
+chrome.declarativeNetRequest.updateDynamicRules({
+  removeRuleIds: [RULE_ID],
+  addRules: [{
     id: RULE_ID,
-    priority: 1,
     condition: {
-      urlFilter: `${TARGET_URL}?list_type=liked&${PARAM_KEY}=10`,
+      urlFilter: "https://apiv3.shanbay.com/news/user_articles?list_type=liked&ipp=10",
       resourceTypes: [chrome.declarativeNetRequest.ResourceType.XMLHTTPREQUEST]
     },
     action: {
@@ -50,15 +46,10 @@ function createRule() {
       redirect: {
         transform: {
           queryTransform: {
-            addOrReplaceParams: [{ key: PARAM_KEY, value: PARAM_VALUE }]
+            addOrReplaceParams: [{ key: "ipp", value: "100" }]
           }
         }
       }
     },
-  };
-}
-
-chrome.declarativeNetRequest.updateDynamicRules({
-  removeRuleIds: [RULE_ID],
-  addRules: [createRule()]
+  }]
 });
