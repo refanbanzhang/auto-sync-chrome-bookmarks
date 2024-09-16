@@ -31,3 +31,5 @@ chrome.bookmarks.onRemoved.addListener(async () => {
   }
   coverRemoteBookmarks();
 });
+
+console.log('背景脚本已加载');

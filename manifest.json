@@ -2,8 +2,11 @@
   "manifest_version": 3,
   "name": "My Chrome Extension",
   "version": "1.0.0",
-  "description": "A Chrome extension template",
-  "permissions": ["storage", "bookmarks"],
+  "description": "A Chrome Extension for Shanbay",
+  "permissions": [
+    "storage",
+    "bookmarks"
+  ],
   "action": {
     "default_popup": "index.html"
   },
@@ -12,7 +15,8 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"]
+      "matches": ["<all_urls>"],
+      "js": ["src/content.ts"]
     }
   ]
 }
