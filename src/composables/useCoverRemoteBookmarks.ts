@@ -20,7 +20,12 @@ export function useCoverRemoteBookmarks() {
         throw new Error('获取书签时出错')
       }
 
-      await sendToServer(bookmarks.value[0].children[0].children)
+      const bookmarksToSync = bookmarks.value[0]?.children?.[0]?.children
+      if (bookmarksToSync && bookmarksToSync.length > 0) {
+        await sendToServer(bookmarksToSync)
+      } else {
+        console.warn('本地书签为空，跳过同步以避免清空远程书签')
+      }
     } catch (error) {
       console.error('同步书签时出错:', error)
       hasError.value = true
