@@ -1,3 +1,4 @@
+import { fetchBookmarks } from "./api";
 import { useCoverLocalBookmarks } from "./composables/useCoverLocalBookmarks";
 import { useCoverRemoteBookmarks } from "./composables/useCoverRemoteBookmarks";
 import { isCreatingBookmarks } from "./stores/useBookmarksStore";
@@ -11,7 +12,13 @@ chrome.runtime.onStartup.addListener(async () => {
   if (isCreating) {
     return;
   }
-  coverLocalBookmarks();
+
+  const remoteBookmarks = await fetchBookmarks()
+  if (remoteBookmarks.length > 1) {
+    await coverLocalBookmarks();
+  } else {
+    console.log('远程书签数量不足，跳过同步')
+  }
 });
 
 chrome.bookmarks.onCreated.addListener(async () => {
