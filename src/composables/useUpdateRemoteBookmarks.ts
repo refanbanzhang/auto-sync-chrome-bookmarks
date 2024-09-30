@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { useAsyncState } from '@vueuse/core'
 import { sendToServer } from '../api'
 
-export function useCoverRemoteBookmarks() {
+export function useUpdateRemoteBookmarks() {
   const isLoading = ref(false)
   const hasError = ref(false)
 

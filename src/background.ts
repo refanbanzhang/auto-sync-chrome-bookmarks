@@ -1,10 +1,10 @@
 import { fetchBookmarks } from "./api";
-import { useCoverLocalBookmarks } from "./composables/useCoverLocalBookmarks";
-import { useCoverRemoteBookmarks } from "./composables/useCoverRemoteBookmarks";
+import { useUpdateLocalBookmarks } from "./composables/useUpdateLocalBookmarks";
+import { useUpdateRemoteBookmarks } from "./composables/useUpdateRemoteBookmarks";
 import { isCreatingBookmarks } from "./stores/useBookmarksStore";
 
-const { coverLocalBookmarks } = useCoverLocalBookmarks();
-const { coverRemoteBookmarks } = useCoverRemoteBookmarks();
+const { coverLocalBookmarks } = useUpdateLocalBookmarks();
+const { coverRemoteBookmarks } = useUpdateRemoteBookmarks();
 
 chrome.runtime.onStartup.addListener(async () => {
   const isCreating = await isCreatingBookmarks()

@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { fetchBookmarks } from '../api'
 import { start, finished } from "../stores/useBookmarksStore";
 
-export function useCoverLocalBookmarks() {
+export function useUpdateLocalBookmarks() {
   const isLoading = ref(false)
   const hasError = ref(false)
 

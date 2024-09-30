@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { ElMessageBox } from 'element-plus'
-import { useCoverRemoteBookmarks } from './composables/useCoverRemoteBookmarks'
-import { useCoverLocalBookmarks } from './composables/useCoverLocalBookmarks'
+import { useUpdateRemoteBookmarks } from  './composables/useUpdateRemoteBookmarks'
+import { useUpdateLocalBookmarks } from './composables/useUpdateLocalBookmarks'
 
-const { isLoading: isLoadingRemote, hasError: hasErrorRemote, coverRemoteBookmarks } = useCoverRemoteBookmarks()
-const { isLoading: isLoadingLocal, hasError: hasErrorLocal, coverLocalBookmarks } = useCoverLocalBookmarks()
+const { isLoading: isLoadingRemote, hasError: hasErrorRemote, coverRemoteBookmarks } = useUpdateRemoteBookmarks()
+const { isLoading: isLoadingLocal, hasError: hasErrorLocal, coverLocalBookmarks } = useUpdateLocalBookmarks()
 const hasError = computed(() => hasErrorRemote || hasErrorLocal)
 
 async function handleCoverRemoteBookmarks() {
