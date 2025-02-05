@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "My Chrome Extension",
   "version": "1.0.0",
-  "description": "A Chrome Extension for Shanbay",
+  "description": "A Chrome Extension",
   "permissions": [
     "storage",
     "bookmarks",
@@ -16,11 +16,5 @@
   },
   "background": {
     "service_worker": "src/background.ts"
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["src/content.ts"]
-    }
-  ]
+  }
 }
