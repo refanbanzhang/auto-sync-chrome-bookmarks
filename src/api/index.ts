@@ -1,6 +1,6 @@
 const host = 'https://fc-mp-df4ec9b3-fa24-462e-9e69-c23df91f3ffd.next.bspapp.com'
 
-export async function sendToServer(bookmarks: chrome.bookmarks.BookmarkTreeNode[]) {
+export async function saveBookmarks(bookmarks: chrome.bookmarks.BookmarkTreeNode[]) {
   const res = await fetch(`${host}/data/setData`, {
     method: 'POST',
     headers: {

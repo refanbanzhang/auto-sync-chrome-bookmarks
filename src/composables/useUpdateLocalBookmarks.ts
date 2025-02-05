@@ -40,7 +40,7 @@ export function useUpdateLocalBookmarks() {
     await finished()
   }
 
-  async function coverLocalBookmarks() {
+  async function rewriteLocalBookmarks() {
     try {
       isLoading.value = true
       hasError.value = false
@@ -58,6 +58,6 @@ export function useUpdateLocalBookmarks() {
   return {
     isLoading,
     hasError,
-    coverLocalBookmarks,
+    rewriteLocalBookmarks,
   }
 }
