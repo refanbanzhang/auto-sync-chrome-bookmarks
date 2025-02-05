@@ -6,6 +6,7 @@ import { isCreatingBookmarks } from "./stores/useBookmarksStore";
 const { coverLocalBookmarks } = useUpdateLocalBookmarks();
 const { coverRemoteBookmarks } = useUpdateRemoteBookmarks();
 
+// 浏览器启动时触发
 chrome.runtime.onStartup.addListener(async () => {
   const isCreating = await isCreatingBookmarks()
   console.log('onStartup syncing', isCreating)
@@ -21,6 +22,7 @@ chrome.runtime.onStartup.addListener(async () => {
   }
 });
 
+// 创建书签时触发
 chrome.bookmarks.onCreated.addListener(async () => {
   const isCreating = await isCreatingBookmarks()
   console.log('onCreated syncing', isCreating)
@@ -30,6 +32,7 @@ chrome.bookmarks.onCreated.addListener(async () => {
   coverRemoteBookmarks();
 });
 
+// 删除书签时触发
 chrome.bookmarks.onRemoved.addListener(async () => {
   const isCreating = await isCreatingBookmarks()
   console.log('onRemoved syncing', isCreating)
@@ -37,26 +40,4 @@ chrome.bookmarks.onRemoved.addListener(async () => {
     return;
   }
   coverRemoteBookmarks();
-});
-
-const RULE_ID = 1;
-chrome.declarativeNetRequest.updateDynamicRules({
-  removeRuleIds: [RULE_ID],
-  addRules: [{
-    id: RULE_ID,
-    condition: {
-      urlFilter: "https://apiv3.shanbay.com/news/user_articles?list_type=liked&ipp=10",
-      resourceTypes: [chrome.declarativeNetRequest.ResourceType.XMLHTTPREQUEST]
-    },
-    action: {
-      type: chrome.declarativeNetRequest.RuleActionType.REDIRECT,
-      redirect: {
-        transform: {
-          queryTransform: {
-            addOrReplaceParams: [{ key: "ipp", value: "100" }]
-          }
-        }
-      }
-    },
-  }]
 });
